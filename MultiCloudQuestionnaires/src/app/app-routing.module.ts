@@ -5,7 +5,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+  },
+  { path: '**', redirectTo: './tabs/tabs1'}
 ];
 @NgModule({
   imports: [

@@ -61,6 +61,11 @@
         </ion-radio-group>
       </ion-list>
     </ion-item>
+    <div class="error"
+      *ngIf="cloudPreferencesForm.hasError('required', 'expertise') && (cloudPreferencesForm.controls.expertise.dirty || cloudPreferencesForm.controls.expertise.touched)">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      This field is required
+    </div>
 
     <ion-item>
       <ion-label postition="floating"><b>Rate your <u>performance</u> requirement for the application</b></ion-label>
@@ -128,6 +133,7 @@
 
   </form>
 
-  <ion-button color="tertiary" [disabled]="!cloudPreferencesForm.valid" expand="full" (click)="submitSurvey()">Submit</ion-button>
+  <ion-button color="tertiary" [disabled]="!cloudPreferencesForm.valid" expand="full" (click)="submitSurvey()">Submit
+  </ion-button>
 
 </ion-content>

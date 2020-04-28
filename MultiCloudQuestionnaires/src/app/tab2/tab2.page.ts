@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,20 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  public customerSatisfactionForm: FormGroup;
 
+  constructor(private fb: FormBuilder) {
+
+    this.customerSatisfactionForm = this.fb.group({
+      satisfied: ['', Validators.required],
+      recommendations: ['', Validators.required],
+      preferences: ['', Validators.required],
+      feedback: ['', Validators.compose([Validators.maxLength(200), Validators.pattern("^[a-zA-Z0-9 -.']*$")])]
+    });
+
+  }
+
+  submitSurvey() {
+
+  }
 }

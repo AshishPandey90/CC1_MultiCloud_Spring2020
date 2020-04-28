@@ -13,62 +13,76 @@
     </ion-toolbar>
   </ion-header>
 
-  <form>
+  <form [formGroup]="customerSatisfactionForm">
+
     <ion-item>
-      <ion-list>
-        <ion-radio-group value="Netural">
-          <ion-list-header>
-            <ion-label><b>Overall, how satisfied were you with the template recommendations?</b></ion-label>
-          </ion-list-header>
-
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Very Bad</ion-label>
-                <ion-radio slot="start" value="Very Bad"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <ion-item>
-                <ion-label>Bad</ion-label>
-                <ion-radio slot="start" value="Bad"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <ion-item>
-                <ion-label>Netural</ion-label>
-                <ion-radio slot="start" value="Netural"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <ion-item>
-                <ion-label>Good</ion-label>
-                <ion-radio slot="start" value="Good"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <ion-item>
-                <ion-label>Great</ion-label>
-                <ion-radio slot="start" value="Great"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-            <ion-col>
-              <ion-item>
-                <ion-label>Excellent</ion-label>
-                <ion-radio slot="start" value="Excellent"></ion-radio>
-              </ion-item>
-            </ion-col>
-
-          </ion-row>
-        </ion-radio-group>
-      </ion-list>
+      <ion-label><b>To what extent do you agree with the following statements:</b></ion-label>
     </ion-item>
 
+    <ion-item>
+      <ion-label>"I am satisfied with the templates that were recommended to me."</ion-label>
+      <ion-select slot="start" formControlName="satisfied">
+        <ion-select-option value='Strongly Agree'>Strongly Agree</ion-select-option>
+        <ion-select-option value='Agree'>Agree</ion-select-option>
+        <ion-select-option value='Neutral'>Neutral</ion-select-option>
+        <ion-select-option value='Disagree'>Disagree</ion-select-option>
+        <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'satisfied') && (cloudPreferencesForm.controls.satisfied.dirty || cloudPreferencesForm.controls.satisfied.touched)">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      This field is required
+    </div> -->
+
+    <ion-item>
+      <ion-label>"The template recommendations made it easy for me to choose a cloud service."</ion-label>
+      <ion-select slot="start" formControlName="recommendations">
+        <ion-select-option value='Strongly Agree'>Strongly Agree</ion-select-option>
+        <ion-select-option value='Agree'>Agree</ion-select-option>
+        <ion-select-option value='Neutral'>Neutral</ion-select-option>
+        <ion-select-option value='Disagree'>Disagree</ion-select-option>
+        <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'recommendations') && (cloudPreferencesForm.controls.recommendations.dirty || cloudPreferencesForm.controls.recommendations.touched)">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      This field is required
+    </div> -->
+
+    <ion-item>
+      <ion-label>"The recommended templates accurately reflect my cloud service preferences."</ion-label>
+      <ion-select slot="start" formControlName="preferences">
+        <ion-select-option value='Strongly Agree'>Strongly Agree</ion-select-option>
+        <ion-select-option value='Agree'>Agree</ion-select-option>
+        <ion-select-option value='Neutral'>Neutral</ion-select-option>
+        <ion-select-option value='Disagree'>Disagree</ion-select-option>
+        <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'preferences') && (cloudPreferencesForm.controls.preferences.dirty || cloudPreferencesForm.controls.preferences.touched)">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      This field is required
+    </div> -->
+
+    <br>
+    <br>
+    <ion-label postion="floating"><b>Please enter any additional feedback here:</b></ion-label>
+    <ion-item>
+      <ion-textarea formControlName="feedback" type="text" placeholder="Enter text here..." autoGrow="true"
+        spellcheck="true" wrap="hard"></ion-textarea>
+    </ion-item>
+    <!-- <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('maxLength(200)', 'feedback') && (cloudPreferencesForm.controls.feedback.dirty || cloudPreferencesForm.controls.feedback.touched)">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      This field is required
+    </div> -->
+
   </form>
+
+  <ion-button color="tertiary" [disabled]="!customerSatisfactionForm.valid" expand="full" (click)="submitSurvey()">Submit
+  </ion-button>
 
 </ion-content>

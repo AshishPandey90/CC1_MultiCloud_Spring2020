@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
@@ -8,19 +8,22 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class Tab1Page {
 
-  constructor(private fb: FormBuilder) {}
+  public cloudPreferencesForm: FormGroup;
 
-  cloudPreferencesForm = this.fb.group({
-    expertise: ['', Validators.required],
-    performance: ['', Validators.required],
-    agility: ['', Validators.required],
-    cost: ['', Validators.required],
-    security: ['', Validators.required]
-  });
+  constructor(private fb: FormBuilder) {
 
-  
+    this.cloudPreferencesForm = this.fb.group({
+      expertise: ['', Validators.required],
+      performance: ['', Validators.required],
+      agility: ['', Validators.required],
+      cost: ['', Validators.required],
+      security: ['', Validators.required]
+    });
+
+  }
+
   // called when submit button is clicked
-  submitSurvey(){
+  submitSurvey() {
 
   }
 

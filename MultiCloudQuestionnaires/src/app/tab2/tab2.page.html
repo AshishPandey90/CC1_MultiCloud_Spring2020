@@ -29,11 +29,11 @@
         <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
       </ion-select>
     </ion-item>
-    <!-- <div class="error"
-      *ngIf="customerSatisfactionForm.hasError('required', 'satisfied') && (cloudPreferencesForm.controls.satisfied.dirty || cloudPreferencesForm.controls.satisfied.touched)">
+    <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'satisfied') && (customerSatisfactionForm.controls.satisfied.dirty || customerSatisfactionForm.controls.satisfied.touched)">
       <ion-icon slot="end" name="alert"></ion-icon>
       This field is required
-    </div> -->
+    </div>
 
     <ion-item>
       <ion-label>"The template recommendations made it easy for me to choose a cloud service."</ion-label>
@@ -45,11 +45,11 @@
         <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
       </ion-select>
     </ion-item>
-    <!-- <div class="error"
-      *ngIf="customerSatisfactionForm.hasError('required', 'recommendations') && (cloudPreferencesForm.controls.recommendations.dirty || cloudPreferencesForm.controls.recommendations.touched)">
+    <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'recommendations') && (customerSatisfactionForm.controls.recommendations.dirty || customerSatisfactionForm.controls.recommendations.touched)">
       <ion-icon slot="end" name="alert"></ion-icon>
       This field is required
-    </div> -->
+    </div> 
 
     <ion-item>
       <ion-label>"The recommended templates accurately reflect my cloud service preferences."</ion-label>
@@ -61,11 +61,11 @@
         <ion-select-option value='Strongly Disagree'>Strongly Disagree</ion-select-option>
       </ion-select>
     </ion-item>
-    <!-- <div class="error"
-      *ngIf="customerSatisfactionForm.hasError('required', 'preferences') && (cloudPreferencesForm.controls.preferences.dirty || cloudPreferencesForm.controls.preferences.touched)">
+    <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('required', 'preferences') && (customerSatisfactionForm.controls.preferences.dirty || customerSatisfactionForm.controls.preferences.touched)">
       <ion-icon slot="end" name="alert"></ion-icon>
       This field is required
-    </div> -->
+    </div>
 
     <br>
     <br>
@@ -74,11 +74,16 @@
       <ion-textarea formControlName="feedback" type="text" placeholder="Enter text here..." autoGrow="true"
         spellcheck="true" wrap="hard"></ion-textarea>
     </ion-item>
-    <!-- <div class="error"
-      *ngIf="customerSatisfactionForm.hasError('maxLength(200)', 'feedback') && (cloudPreferencesForm.controls.feedback.dirty || cloudPreferencesForm.controls.feedback.touched)">
+    <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('maxlength', 'feedback')">
       <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div> -->
+      Feedback cannot exceed 200 characters
+    </div>
+    <div class="error"
+      *ngIf="customerSatisfactionForm.hasError('pattern', 'feedback')">
+      <ion-icon slot="end" name="alert"></ion-icon>
+      Only alphanumeric characters, dashes(-), periods(.), and apostrophes(') are accepted
+    </div>
 
   </form>
 

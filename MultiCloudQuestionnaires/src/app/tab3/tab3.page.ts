@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab3',
@@ -8,38 +7,31 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class Tab3Page {
 
-  rules = [
-    {type: "Performance"},
-    {type: "Agility"},
-    {type: "Security"},
-    {type: "Cost"}
-  ];
+  showchart: boolean = false;
+  //chartData:number[] = [];
 
-  choices = [
-    {phrase: "Excellent"},
-    {phrase: "Above Average"},
-    {phrase: "Average"},
-    {phrase: "Below Average"},
-    {phrase: "Poor"}
-  ];
+  //chartLabels:String[] = [];
+  public doughnutChartLabels:string[] = [];
+  public doughnutChartData:number[] = [];
+  public doughnutChartType:string = 'doughnut';
 
-  public ruleCreationForm: FormGroup;
+  constructor() {}
 
 
-  constructor(private fb: FormBuilder) {
+  getResults(){
+    // retrieve info from backend
 
-    this.ruleCreationForm = this.fb.group({
-      performance: ['', Validators.required],
-      agility: ['', Validators.required],
-      cost: ['', Validators.required],
-      security: ['', Validators.required],
-      CSP: ['', Validators.required]
-    });
+    // these values will be populated by results
+    // dummy values for now
+    this.doughnutChartData = [.30, .10, .60];
+    this.doughnutChartLabels=["MU", "GENI", "AWS"];
 
+    this.showchart = true;
   }
 
-  submitSurvey(){
+  exportToOnTimeURB(){
 
+    // might make sense to remove this later
+    this.showchart = false;
   }
-
 }

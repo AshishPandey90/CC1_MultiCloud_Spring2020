@@ -14,6 +14,21 @@ export class Tab1Page {
   private form_vals;
   public rulesArray:FormArray;
 
+  /*rules = [
+    {type: "Performance"},
+    {type: "Agility"},
+    {type: "Security"},
+    {type: "Cost"}
+  ];
+
+  choices = [
+    {phrase: "Excellent"},
+    {phrase: "Above Average"},
+    {phrase: "Average"},
+    {phrase: "Below Average"},
+    {phrase: "Poor"}
+  ];*/
+
   constructor(private fb: FormBuilder, private http: HttpClient) {
 
     this.cloudPreferencesForm = this.fb.group({
@@ -28,6 +43,9 @@ export class Tab1Page {
     });
 
   }
+
+  // Reference: https://alligator.io/angular/reactive-forms-formarray-dynamic-fields/
+  // Reference: https://medium.com/aubergine-solutions/add-push-and-remove-form-fields-dynamically-to-formarray-with-reactive-forms-in-angular-acf61b4a2afe
 
   createRule(): FormGroup{
     return this.fb.group({

@@ -1,111 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Rule Creation
+      Fuzzy Recommendation
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Rule Creation</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
 
+  <ion-button color="primary" (click)="getResults()">Get Results</ion-button>
+  <ion-button color="success" [disabled]="!showchart" (click)="exportToOnTimeURB()">Export to On-Time-URB</ion-button>
 
-
-
-  <form [formGroup]="ruleCreationForm">
-    <ion-item>
-      <ion-label postition="floating">If <u>performance</u> is: </ion-label>
-      <ion-select formControlName="performance">
-        <ion-select-option value='Excellent'>Excellent</ion-select-option>
-        <ion-select-option value='Above Average'>Above Average</ion-select-option>
-        <ion-select-option value='Average'>Average</ion-select-option>
-        <ion-select-option value='Below Average'>Below Average</ion-select-option>
-        <ion-select-option value='Poor'>Poor</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div class="error"
-      *ngIf="ruleCreationForm.hasError('required', 'performance') && (ruleCreationForm.controls.performance.dirty || ruleCreationForm.controls.performance.touched) ">
-      <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div>
-
-    <ion-item>AND</ion-item>
-
-    <ion-item>
-      <ion-label postition="floating">If <u>agility</u> is: </ion-label>
-      <ion-select formControlName="agility">
-        <ion-select-option value='Excellent'>Excellent</ion-select-option>
-        <ion-select-option value='Above Average'>Above Average</ion-select-option>
-        <ion-select-option value='Average'>Average</ion-select-option>
-        <ion-select-option value='Below Average'>Below Average</ion-select-option>
-        <ion-select-option value='Poor'>Poor</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div class="error"
-      *ngIf="ruleCreationForm.hasError('required', 'agility') && (ruleCreationForm.controls.agility.dirty || ruleCreationForm.controls.agility.touched) ">
-      <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div>
-
-    <ion-item>AND</ion-item>
-
-    <ion-item>
-      <ion-label postition="floating">If <u>security</u> is:</ion-label>
-      <ion-select formControlName="security">
-        <ion-select-option value='Excellent'>Excellent</ion-select-option>
-        <ion-select-option value='Above Average'>Above Average</ion-select-option>
-        <ion-select-option value='Average'>Average</ion-select-option>
-        <ion-select-option value='Below Average'>Below Average</ion-select-option>
-        <ion-select-option value='Poor'>Poor</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div class="error"
-      *ngIf="ruleCreationForm.hasError('required', 'security') && (ruleCreationForm.controls.security.dirty || ruleCreationForm.controls.security.touched) ">
-      <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div>
-
-    <ion-item>AND</ion-item>
-
-    <ion-item>
-      <ion-label postition="floating">If <u>cost</u> is:</ion-label>
-      <ion-select formControlName="cost">
-        <ion-select-option value='Excellent'>Excellent</ion-select-option>
-        <ion-select-option value='Above Average'>Above Average</ion-select-option>
-        <ion-select-option value='Average'>Average</ion-select-option>
-        <ion-select-option value='Below Average'>Below Average</ion-select-option>
-        <ion-select-option value='Poor'>Poor</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div class="error"
-      *ngIf="ruleCreationForm.hasError('required', 'cost') && (ruleCreationForm.controls.cost.dirty || ruleCreationForm.controls.cost.touched) ">
-      <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div>
-
-    <ion-item>THEN</ion-item>
-
-    <ion-item>
-      <ion-label postition="floating">Cloud Service Platform (CSP) is:</ion-label>
-      <ion-select formControlName="CSP">
-        <ion-select-option value='AWS'>AWS</ion-select-option>
-        <ion-select-option value='GENI'>GENI</ion-select-option>
-        <ion-select-option value='MU'>MU</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div class="error"
-      *ngIf="ruleCreationForm.hasError('required', 'CSP') && (ruleCreationForm.controls.CSP.dirty || ruleCreationForm.controls.CSP.touched) ">
-      <ion-icon slot="end" name="alert"></ion-icon>
-      This field is required
-    </div>
-
-  </form>
-
-  <ion-button color="tertiary" [disabled]="!ruleCreationForm.valid" expand="full" (click)="submitSurvey()">Submit
-  </ion-button>
+  <div *ngIf="showchart">
+    <!--  [options]="chartOptions" -->
+    <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
 
 </ion-content>

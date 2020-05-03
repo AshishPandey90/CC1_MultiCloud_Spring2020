@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,6 +12,7 @@ export class Tab1Page {
 
   public cloudPreferencesForm: FormGroup;
   private form_vals;
+  public rulesArray:FormArray;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
 
@@ -20,9 +21,32 @@ export class Tab1Page {
       performance: ['', Validators.required],
       agility: ['', Validators.required],
       cost: ['', Validators.required],
-      security: ['', Validators.required]
+      security: ['', Validators.required],
+      //    items: this.formBuilder.array([ this.createItem() ])
+      rulesArray: this.fb.array([this.createRule()], [Validators.required])
+
     });
 
+  }
+
+  createRule(): FormGroup{
+    return this.fb.group({
+      performance2: ['', Validators.required],
+      agility2: ['', Validators.required],
+      cost2: ['', Validators.required],
+      security2: ['', Validators.required],
+      CSP: ['', Validators.required]
+    });
+  }
+
+  addRule(): void{
+    this.rulesArray = this.cloudPreferencesForm.get('rulesArray') as FormArray;
+    this.rulesArray.push(this.createRule());
+  }
+
+  deleteRule(): void{
+    this.rulesArray = this.cloudPreferencesForm.get('rulesArray') as FormArray;
+    this.rulesArray.removeAt(this.rulesArray.length-1);
   }
 
   // called when submit button is clicked

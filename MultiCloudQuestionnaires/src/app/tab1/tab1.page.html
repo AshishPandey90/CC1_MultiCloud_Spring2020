@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Cloud Preferences Survey
+      Cloud Preferences and Rule Creation
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Cloud Preferences Survey</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="sticky">
+    <ion-item>
+      <ion-title size="large">Cloud Preference</ion-title>
+    </ion-item>
+  </div>
 
   <form [formGroup]="cloudPreferencesForm">
     <ion-item>
@@ -129,6 +129,118 @@
       *ngIf="cloudPreferencesForm.hasError('required', 'security') && (cloudPreferencesForm.controls.security.dirty || cloudPreferencesForm.controls.security.touched)">
       <ion-icon slot="end" name="alert"></ion-icon>
       This field is required
+    </div>
+
+
+
+
+
+
+    <!-- Rule Creation -->
+    <br>
+    <br>
+    <br>
+    <div class="sticky">
+      <ion-item>
+        <ion-title size="large">Rule Creation</ion-title>
+
+        <ion-button color="primary" (click)="addRule()">Add Rule </ion-button>
+        <ion-button color="warning" (click)="deleteRule()">Delete Rule</ion-button>
+      </ion-item>
+    </div>
+
+    <div formArrayName="rulesArray"
+      *ngFor="let rule of cloudPreferencesForm.get('rulesArray').controls; let i = index;">
+      <div [formGroupName]="i">
+
+        <br>
+        <br>
+        <ion-item><b>Rule #{{ i+1 }}</b></ion-item>
+
+        <ion-item>
+          <ion-label postition="floating">If <u>performance</u> is: </ion-label>
+          <ion-select formControlName="performance2">
+            <ion-select-option value='Excellent'>Excellent</ion-select-option>
+            <ion-select-option value='Above Average'>Above Average</ion-select-option>
+            <ion-select-option value='Average'>Average</ion-select-option>
+            <ion-select-option value='Below Average'>Below Average</ion-select-option>
+            <ion-select-option value='Poor'>Poor</ion-select-option>
+          </ion-select>
+          , AND
+        </ion-item>
+        <div class="error"
+          *ngIf="cloudPreferencesForm.hasError('required', 'performance2') && (cloudPreferencesForm.controls.performance2.dirty || cloudPreferencesForm.controls.performance2.touched) ">
+          <ion-icon slot="end" name="alert"></ion-icon>
+          This field is required
+        </div>
+
+        <ion-item>
+          <ion-label postition="floating">If <u>agility</u> is: </ion-label>
+          <ion-select formControlName="agility2">
+            <ion-select-option value='Excellent'>Excellent</ion-select-option>
+            <ion-select-option value='Above Average'>Above Average</ion-select-option>
+            <ion-select-option value='Average'>Average</ion-select-option>
+            <ion-select-option value='Below Average'>Below Average</ion-select-option>
+            <ion-select-option value='Poor'>Poor</ion-select-option>
+          </ion-select>
+          , AND
+        </ion-item>
+
+        <div class="error"
+          *ngIf="cloudPreferencesForm.hasError('required', 'agility2') && (cloudPreferencesForm.controls.agility2.dirty || cloudPreferencesForm.controls.agility2.touched) ">
+          <ion-icon slot="end" name="alert"></ion-icon>
+          This field is required
+        </div>
+
+        <ion-item>
+          <ion-label postition="floating">If <u>security</u> is:</ion-label>
+          <ion-select formControlName="security2">
+            <ion-select-option value='Excellent'>Excellent</ion-select-option>
+            <ion-select-option value='Above Average'>Above Average</ion-select-option>
+            <ion-select-option value='Average'>Average</ion-select-option>
+            <ion-select-option value='Below Average'>Below Average</ion-select-option>
+            <ion-select-option value='Poor'>Poor</ion-select-option>
+          </ion-select>
+          , AND
+        </ion-item>
+        <div class="error"
+          *ngIf="cloudPreferencesForm.hasError('required', 'security') && (cloudPreferencesForm.controls.security.dirty || cloudPreferencesForm.controls.security.touched) ">
+          <ion-icon slot="end" name="alert"></ion-icon>
+          This field is required
+        </div>
+
+        <ion-item>
+          <ion-label postition="floating">If <u>cost</u> is:</ion-label>
+          <ion-select formControlName="cost2">
+            <ion-select-option value='Excellent'>Excellent</ion-select-option>
+            <ion-select-option value='Above Average'>Above Average</ion-select-option>
+            <ion-select-option value='Average'>Average</ion-select-option>
+            <ion-select-option value='Below Average'>Below Average</ion-select-option>
+            <ion-select-option value='Poor'>Poor</ion-select-option>
+          </ion-select>
+          , THEN
+        </ion-item>
+        <div class="error"
+          *ngIf="cloudPreferencesForm.hasError('required', 'cost') && (cloudPreferencesForm.controls.cost.dirty || cloudPreferencesForm.controls.cost.touched) ">
+          <ion-icon slot="end" name="alert"></ion-icon>
+          This field is required
+        </div>
+
+        <ion-item>
+          <ion-label postition="floating">Cloud Service Platform (CSP) is:</ion-label>
+          <ion-select formControlName="CSP">
+            <ion-select-option value='AWS'>AWS</ion-select-option>
+            <ion-select-option value='GENI'>GENI</ion-select-option>
+            <ion-select-option value='MU'>MU</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error"
+          *ngIf="cloudPreferencesForm.hasError('required', 'CSP') && (cloudPreferencesForm.controls.CSP.dirty || cloudPreferencesForm.controls.CSP.touched) ">
+          <ion-icon slot="end" name="alert"></ion-icon>
+          This field is required
+        </div>
+      </div>
+
     </div>
 
   </form>

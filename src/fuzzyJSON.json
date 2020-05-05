@@ -1,0 +1,6 @@
+{         
+"score" :["Very_poor","Below_Average","Average","Above_Average","Excellent"],
+"provider":["Geni","AWS","MU"],
+"performance" :[   "Performance", "Agility", "Cost ","Security"] 
+ "identifiers": [ 0,1,2,3,4,5,6,7,8,9 ]
+}

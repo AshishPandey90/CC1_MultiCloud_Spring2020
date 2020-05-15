@@ -65,7 +65,7 @@ def calculator(list,accuracy_factor):
         breakflag=0
         flag=[str(c+1) for c in range(accuracy_factor)]
         flag2=[0 for c in range(accuracy_factor)]
-        print(flag)
+        #print(flag)
         for j in range(accuracy_factor):
             if bucket[j]/len(list)<hold:
                 flag[j]='0'
@@ -76,15 +76,15 @@ def calculator(list,accuracy_factor):
                 partamount = partamount + 1
         for chuck in tmp:
             if len(chuck)>0:
-                chuck=chuck[0].split()
+                chuckn=[c for c in chuck]
                 chuck_count=0
                 chuck_id=[]
-                for inde in chuck:
+                for inde in chuckn:
                     index=int(inde)
                     index = index - 1
                     chuck_id.append(index)
                     chuck_count = chuck_count + bucket[index]
-                if partamount == 1 and chuck_count/len(list)>0.5:
+                if partamount == 1 and chuck_count/len(list)>=0.5:
                     for i in chuck_id:
                         flag2[i]=1
                     breakflag = 1
@@ -126,7 +126,7 @@ def calculator(list,accuracy_factor):
     standard_diviation=0
     for k in range(accuracy_factor):
         standard_diviation = ((2*k+1-mean_value)**2)*bucket[k] + standard_diviation
-    print(bucket,flag)
+    #print(bucket,flag)
     standard_diviation=(standard_diviation/sum(bucket))**0.5
     return mean_value,standard_diviation
    
@@ -193,10 +193,6 @@ if __name__=="__main__":
     rulesfile:json file contains rules
     accuracy_factor: amount of values for each property
         eg: if the value only has 'good' and 'bad', then it's 2
-    dropout_facotr: ignore the data points buckets that has lesser amount than dropout_factor*total_data_amount
-        eg: for a list[0,10,10,10,10,10,10,10], if dropout_factor=0.2, then 0 bucket will be ignored since (1/7)<0.2
     output order is performance(mean,standard_deviation), agility(mean,standard_deviation), cost(mean,standard_deviation), sercuirty(mean,standard_deviation)
     '''
     print(Opertor('rules.json',5))
-
-

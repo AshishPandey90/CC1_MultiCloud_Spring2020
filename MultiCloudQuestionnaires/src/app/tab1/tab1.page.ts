@@ -69,14 +69,11 @@ export class Tab1Page {
 
   // called when submit button is clicked
   submitSurvey() {
-    //console.log("REQUESTING DATA");
-    //this.http.get("https://dog.ceo/api/breeds/image/random").subscribe(response => console.log(response));
- 
-
+  
     console.log("POSTING DATA");
     this.form_vals = this.cloudPreferencesForm.value;
 
-    this.http.post("https://google.com", {user_id: "kpsgf7", 
+    this.http.post("http://130.127.215.155:8080/cc1/rest/dataCollection", {user_id: "kpsgf7", 
                                           user_session: "kspgf7_4212020214PM",
                                           scale: "5",
                                           scale_identifiers:["Very_Poor","Below_Average","Average","Above_Average","Excellent"],
@@ -88,7 +85,7 @@ export class Tab1Page {
                                             cost: this.form_vals.cost,
                                             security: this.form_vals.security
                                           },
-                                          rules:[]
+                                          rules:this.rulesArray
                                           }).subscribe(response => console.log(response))
   }
 

@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Fuzzy Recommendation
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-button color="primary" (click)="getResults()">Get Results</ion-button>
+  <ion-button color="success" [disabled]="!showchart" (click)="exportToOnTimeURB()">Export to On-Time-URB</ion-button>
+
+  <div *ngIf="showchart">
+    <!--  [options]="chartOptions" -->
+    <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+</ion-content>

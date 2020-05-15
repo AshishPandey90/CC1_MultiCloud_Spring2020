@@ -11,8 +11,8 @@ import java.util.*;
 public class fuzzyOptions {
     
     public enum identEnum { VERY_BAD,BAD,NEUTRAL,GOOD,GREAT,EXCELLENT;} 
-    public enum inputEnum {PERFORMANCE,AGILITY,COST,SERCURITY;}
-    public enum outputEnum{GENI, AWS, MU;}
+    public enum inputEnum { PERFORMANCE,AGILITY,COST,SERCURITY;}
+    public enum outputEnum{ GENI, AWS, MU;}
       
     ArrayList<String> identifiers = new ArrayList<>(Arrays.asList("Very_Bad","Bad", "Neutral, "Good","Great","Excellent"));
     ArrayList<String> inputDim = new ArrayList<>(Arrays.asList("Performance","Agility","Cost","Security"));
@@ -22,12 +22,12 @@ public class fuzzyOptions {
       public Map <"Agility", <String>> mapAgil;
       public Map <"Cost", <String>> mapCost;
       public Map <"Security", <String>> mapSecurity;     
-    
+      public Map <"CSP",<String>>mapProvider;
 //    public Map <inputEnum, ArrayList<String>> mapPerf;
 //    public Map <inputEnum, ArrayList<String>> mapAgil;
 //    public Map <inputEnum, ArrayList<String>> mapCost;
 //    public Map <inputEnum, ArrayList<String>> mapSecurity; 
-    List<Entry<mapPerf, mapAgil,mapCost,mapSecurity>> Rule = new ArrayList<>();
+    List<Entry<mapPerf, mapAgil,mapCost,mapSecurity, mapProvider>> Rule = new ArrayList<>();
     List<Entry<Rule>> Rules = new ArrayList<>();
     //
     //Rule.add(new SimpleImmutableEntry<>(mapPerf1,mapAgil1,mapCost1,mapSecurity1));
@@ -42,34 +42,50 @@ public class fuzzyOptions {
                      
                     return G.get( random.nextInt(G.size()) ) ;
                 }
-     static Rules generateData(int n,identEnum low,identEnum high,outputEnum ...CSP)
+     static Rules generateData(int n,identEnum low_p,identEnum high_p,identEnum low_a,identEnum high_a,identEnum low_c,identEnum high_c,identEnum low_s,identEnum high_s, outputEnum ...CSP)
         
-         {int i;
+         {   if (CSP.value().length == 0) { 
+           throw new IllegalArgumentException("No values supplied.");
+           }
+          int i;
           String dataScore1,dataScore2,dataScore3,dataScore4;
          
-          inputIdentifiers  = subindentifier(identiers,low,high);
+          identif_performance  = subindentifier(identiers,low_p,high_p);
+          identif_agility  = subindentifier(identiers,low_a,high_a);
+          identif_cost  = subindentifier(identiers,low_c,high_c);
+          identif_security = subindentifier(identiers,low_s,high_s);
+          
           ArrayList<String> desiredProviders = new ArrayList();
           for(outputEnum provider : CSP )
                {
-                 desiredProviders.add(provider);
+                 desiredProviders.add(subidentifier(outputdim, provider,provider));
                }
           for (i=0 ; i< n ;i++)
            {
-            for (inputEnum p_a_c_s : inputEnum.values())  
+            /*for (inputEnum p_a_c_s : inputEnum.values())  
              { dataScore+String.valueOf(inputEnum.p_a_c_s)=randomItem(inputIdentifiers);
                
-               }  
-             mapPerf.put("Performance",dataScore1);
-             mapAgil.put("Agility",dataScore2);
-             mapCost.put("Cost",dataScore3);) 
-             mapSecurity.put("Security",dataScore4); 
-             Rule.add(new SimpleImmutableEntry<>(mapPerf,mapAgil,mapCost,mapSecurity);
+               } */
+             dataScore_p =  randomItem (identif_performance);
+             dataScore_a =  randomItem (identif_agility);
+             dataScore_c =  randomItem (identif_cost);
+             dataScore_s =  randomItem (identif_security);
+             provider    =  randomItem (desiredProviders) ;
+             
+             mapPerf.put("Performance",dataScore_p);
+             mapAgil.put("Agility",dataScore_a);
+             mapCost.put("Cost",dataScore_c);
+             mapSecurity.put("Security",dataScore_s); 
+             mapProvider.put("Provider",provider);
+             
+             Rule.add(new SimpleImmutableEntry<>(mapPerf,mapAgil,mapCost,mapSecurity,mapProvider));
              Rules.add(new SimpleImmutableEntry<>(Rule));
              Rule.clear();
              mapPerf.clear();
              mapAgil.clear();
              mapCost.clear();
-             mapSecurity.clear();        
+             mapSecurity.clear(); 
+             mapProvider.clear();
            }
        // ArrayList<String> subIdentifiers= new ArrayList<String>(al.subList(1, 4));
      System.out.println("SubList stored in ArrayList: "+);
@@ -88,7 +104,7 @@ public class fuzzyOptions {
         
         
        Rules rulesGenerated=new Rules<>(); 
-       rulesGenerated =generateData(10,NEUTRAL,EXCELLENT,AWS,GENI);
+       rulesGenerated =generateData(10,NEUTRAL,EXCELLENT,  BAD,GREAT,  VERY_BAD,EXCELLENT,  GOOD, GREAT  ,AWS,GENI);
        Stream.of(rulesGenerated.toString())
                .forEach(System.out::println);
        
